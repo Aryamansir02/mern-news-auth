@@ -1,6 +1,8 @@
 import asyncHandler from 'express-async-handler';
 import User from '../models/userModel.js';
 import generateToken from '../utils/generateToken.js';
+import News from '../models/newsModel.js';
+
 
 // @desc    Auth user & get token
 // @route   POST /api/users/auth
@@ -65,8 +67,56 @@ const logoutUser = (req, res) => {
     res.status(200).json({ message: 'Logged out successfully' });
 };
 
+// @desc    Add bookmark
+// @route   POST /api/users/bookmarks/:id
+// @access  Private
+const addBookmark = asyncHandler(async (req, res) => {
+    const news = await News.findById(req.params.id);
+    
+    if (news) {
+        const user = await User.findById(req.user._id);
+        if (!user.bookmarks.includes(req.params.id)) {
+            user.bookmarks.push(req.params.id);
+            await user.save();
+            res.status(201).json({ message: 'Bookmark added' });
+        } else {
+            res.status(400);
+            throw new Error('News already bookmarked');
+        }
+    } else {
+        res.status(404);
+        throw new Error('News not found');
+    }
+});
+
+// @desc    Remove bookmark
+// @route   DELETE /api/users/bookmarks/:id
+// @access  Private
+const removeBookmark = asyncHandler(async (req, res) => {
+    const news = await News.findById(req.params.id);
+
+    if (news) {
+        const user = await User.findById(req.user._id);
+        if (user.bookmarks.includes(req.params.id)) {
+            user.bookmarks = user.bookmarks.filter(
+                (bookmarkId) => bookmarkId.toString() !== req.params.id
+            );
+            await user.save();
+            res.status(200).json({ message: 'Bookmark removed' });
+        } else {
+            res.status(400);
+            throw new Error('News not bookmarked');
+        }
+    } else {
+        res.status(404);
+        throw new Error('News not found');
+    }
+});
+
 export {
     authUser,
     registerUser,
     logoutUser,
+    addBookmark,
+    removeBookmark
 };

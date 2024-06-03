@@ -34,12 +34,10 @@ const NewsDetail = () => {
       <div className="row justify-content-center">
         <div className="col-md-10 col-lg-8">
           <h2 className="mb-4 text-center">{title}</h2>
-          {imageUrl && (
-            <div className="text-center mb-4">
-              <img src={imageUrl} alt={title} className="img-fluid rounded news-image" />
-            </div>
-          )}
-          <p className="lead">{content}</p>
+          <div className="d-flex justify-content-center">
+            <img src={imageUrl} alt={title} className="img-fluid mb-4" style={{ maxHeight: '400px', objectFit: 'cover' }} />
+          </div>
+          <p>{content}</p>
         </div>
       </div>
     </div>

@@ -12,10 +12,13 @@ const userSchema = mongoose.Schema(
             type: String,
             required: true,
         },
+        bookmarks: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'News'
+            }
+        ]
     },
-    //   {
-    //     timestamps: true,
-    //   }
 );
 
 // Match user entered password to hashed password in database
