@@ -70,10 +70,9 @@ npm run dev
 - `DELETE /api/bookmarks/:id/`: Unbookmark a news article
 - `GET /api//bookmarks`: Get all bookmarked news articles of the user
 
-![Screenshot](./screenshots/Screenshot%202024-06-03%20224209.png)
-![Screenshot](./screenshots/Screenshot%202024-06-03%20224520.png)
-![Screenshot](./screenshots/Screenshot%202024-06-03%20224613.png)
-![Screenshot](./screenshots/Screenshot%202024-06-03%20224721.png)
+![Screenshot](./screenshots/1.png)
+![Screenshot](./screenshots/2.png)
+![Screenshot](./screenshots/3.png)
 
 ## Working on:
 - Date range and category filter on top of the page to search for particular news.
