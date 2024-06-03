@@ -69,11 +69,29 @@ const deleteNews = asyncHandler(async (req, res) => {
     res.status(200).json({ id: req.params.id })
 })
 
+
+// @desc    Get news by ID
+// @route   GET /api/news/:id
+// @access  Private
+const getNewsById = asyncHandler(async (req, res) => {
+  const news = await News.findById(req.params.id);
+
+  if (news) {
+    res.json(news);
+  } else {
+    res.status(404);
+    throw new Error('News not found');
+  }
+});
+
+
+
 export {
     getNews,
     setNews,
     updateNews,
     deleteNews,
+    getNewsById
 }
 
 // CRUD for news added
