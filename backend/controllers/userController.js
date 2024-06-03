@@ -113,10 +113,19 @@ const removeBookmark = asyncHandler(async (req, res) => {
     }
 });
 
+// @desc    Get user bookmarks
+// @route   GET /api/users/bookmarks
+// @access  Private
+const getUserBookmarks = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id).populate('bookmarks');
+    res.json({ bookmarks: user.bookmarks });
+});
+
 export {
     authUser,
     registerUser,
     logoutUser,
     addBookmark,
-    removeBookmark
+    removeBookmark,
+    getUserBookmarks
 };

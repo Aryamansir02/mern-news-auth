@@ -11,6 +11,7 @@ const NewsSchema = new mongoose.Schema({
     },
     imageUrl: {
         type: String,
+        default: "https://t3.ftcdn.net/jpg/03/27/55/60/360_F_327556002_99c7QmZmwocLwF7ywQ68ChZaBry1DbtD.jpg",
     },
     createdAt: {
         type: Date,
